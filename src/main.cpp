@@ -1,5 +1,9 @@
 #include "main.h"
 
+//pros::Motor left_wheels (LEFT_WHEELS_PORT);
+//pros::Motor right_wheels (RIGHT_WHEELS_PORT, true);
+//pros::Motor arm (ARM_PORT, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
+//pros::Motor claw (CLAW_PORT, MOTOR_GEARSET_36);
 /**
  * A callback function for LLEMU's center button.
  *

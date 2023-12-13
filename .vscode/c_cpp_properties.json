@@ -4,7 +4,8 @@
       "name": "PROS Project",
       "includePath": [
         "${workspaceFolder}/**",
-        "/workspaces/Template/include"
+        "/workspaces/Template/include",
+        "/workspaces/Team-3/include"
       ],
       "defines": [
         "_DEBUG",
@@ -17,11 +18,12 @@
       "intelliSenseMode": "gcc-arm",
       "browse": {
         "path": [
-          "/workspaces/Template"
+          "/workspaces/Team-3"
         ],
         "limitSymbolsToIncludedHeaders": true,
         "databaseFilename": ""
-      }
+      },
+      "compileCommands": "/workspaces/Team-3/compile_commands.json"
     }
   ],
   "version": 4
