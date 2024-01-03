@@ -1,5 +1,4 @@
 #include "main.h"
-
 //pros::Motor left_wheels (LEFT_WHEELS_PORT);
 //pros::Motor right_wheels (RIGHT_WHEELS_PORT, true);
 //pros::Motor arm (ARM_PORT, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
@@ -78,20 +77,28 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
+	pros::Motor wheel1(1);
+	pros::Motor wheel2(2);
+	pros::Motor wheel3(3);
+	pros::Motor wheel4(4, true);
+	pros::Motor wheel5(5, true);
+	pros::Motor wheel6(6, true);
+	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+	pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
+	pros::Motor claw (8, MOTOR_GEARSET_36);
+
+	pros::Controller master (CONTROLLER_MASTER);
 
 	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
+		int power = master.get_analog(ANALOG_LEFT_Y);
+		int turn = master.get_analog(ANALOG_RIGHT_X);
+		int left = power + turn;
+		int right = power - turn;
+		left_wheels.move(left);
+    	right_wheels.move(right);
 
-		left_mtr = left;
-		right_mtr = right;
-
-		pros::delay(20);
-	}
+    	pros::delay(2);
+  }
 }
+
