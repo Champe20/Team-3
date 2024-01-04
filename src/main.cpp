@@ -82,7 +82,7 @@ void opcontrol() {
 
 	while (true) {
 		int power = master.get_analog(ANALOG_LEFT_Y); //Gets a Y value from joystick
-		int turn = master.get_analog(ANALOG_RIGHT_X); //Gets a X value from joystick
+		int turn = master.get_analog(ANALOG_LEFT_X); //Gets a X value from joystick
 		int left = power + turn; //Premade calcs
 		int right = power - turn;
 		left_wheels.move(left);
