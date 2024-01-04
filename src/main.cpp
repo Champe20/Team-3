@@ -1,14 +1,4 @@
 #include "main.h"
-//pros::Motor left_wheels (LEFT_WHEELS_PORT);
-//pros::Motor right_wheels (RIGHT_WHEELS_PORT, true);
-//pros::Motor arm (ARM_PORT, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
-//pros::Motor claw (CLAW_PORT, MOTOR_GEARSET_36);
-/**
- * A callback function for LLEMU's center button.
- *
- * When this callback is fired, it will toggle line 2 of the LCD text between
- * "I was pressed!" and nothing.
- */
 void on_center_button() {
 	static bool pressed = false;
 	pressed = !pressed;
@@ -77,7 +67,7 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Motor wheel1(1);
+	pros::Motor wheel1(1); //Assign wheel class to certain ports
 	pros::Motor wheel2(2);
 	pros::Motor wheel3(3);
 	pros::Motor wheel4(4, true);
@@ -86,19 +76,27 @@ void opcontrol() {
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 	pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
-	pros::Motor claw (8, MOTOR_GEARSET_36);
+	pros::Motor spin (8, MOTOR_GEARSET_36);
 
 	pros::Controller master (CONTROLLER_MASTER);
 
 	while (true) {
-		int power = master.get_analog(ANALOG_LEFT_Y);
-		int turn = master.get_analog(ANALOG_RIGHT_X);
-		int left = power + turn;
+		int power = master.get_analog(ANALOG_LEFT_Y); //Gets a Y value from joystick
+		int turn = master.get_analog(ANALOG_RIGHT_X); //Gets a X value from joystick
+		int left = power + turn; //Premade calcs
 		int right = power - turn;
 		left_wheels.move(left);
-    	right_wheels.move(right);
+    		right_wheels.move(right);
 
-    	pros::delay(2);
+		if (master.get_digital(DIGITAL_R1)) {
+			arm.move_velocity(100); // This is 100 because it's a 100rpm motor
+		} else if (master.get_digital(DIGITAL_R2)) {
+			arm.move_velocity(-100);
+		} else {arm.move_velocity(0);}
+		
+		if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(100);} else if (spin.get_digital(DIGITAL_L2)) {spin.move_veloci ty(-100);} else {spin.move_velocity(0);}
+
+    		pros::delay(2);
   }
 }
 
