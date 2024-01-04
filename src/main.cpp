@@ -94,7 +94,7 @@ void opcontrol() {
 			arm.move_velocity(-100);
 		} else {arm.move_velocity(0);}
 		
-		if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(100);} else if (spin.get_digital(DIGITAL_L2)) {spin.move_veloci ty(-100);} else {spin.move_velocity(0);}
+		if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(100);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-100);} else {spin.move_velocity(0);}
 
     		pros::delay(2);
   }
