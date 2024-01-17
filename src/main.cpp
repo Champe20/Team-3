@@ -77,22 +77,26 @@ void opcontrol() {
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 	pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
 	pros::Motor spin (8, MOTOR_GEARSET_36);
+	pros::Motor cat (9, MOTOR_GEARSET_36); //catapult variable
 
 	pros::Controller master (CONTROLLER_MASTER);
 
 	while (true) {
 		int power = master.get_analog(ANALOG_LEFT_Y); //Gets a Y value from joystick
 		int turn = master.get_analog(ANALOG_LEFT_X); //Gets a X value from joystick
-		int left = power + turn; //Premade calcs
-		int right = power - turn;
+		int right = power + turn; //Premade calcs
+		int left = power - turn;
 		left_wheels.move(left);
     		right_wheels.move(right);
 
+		int arm_move = master.get_analog(ANALOG_RIGHT_Y);
+		arm.move_velocity(arm_move);
+
 		if (master.get_digital(DIGITAL_R1)) {
-			arm.move_velocity(100); // This is 100 because it's a 100rpm motor
+			cat.move_velocity(100); // This is 100 because it's a 36 gearset motor
 		} else if (master.get_digital(DIGITAL_R2)) {
-			arm.move_velocity(-100);
-		} else {arm.move_velocity(0);}
+			cat.move_velocity(-100);
+		} else {cat.move_velocity(0);}
 		
 		if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(100);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-100);} else {spin.move_velocity(0);}
 
