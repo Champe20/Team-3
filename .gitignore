@@ -13,3 +13,7 @@ temp.log
 temp.errors
 *.ini
 .d/
+
+# Environment Config
+.vscode/
+compile_commands.json
