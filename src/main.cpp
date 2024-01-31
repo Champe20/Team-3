@@ -77,7 +77,9 @@ void opcontrol() {
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 	pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
 	pros::Motor spin (8, MOTOR_GEARSET_36);
-	pros::Motor cat (9, MOTOR_GEARSET_36); //catapult variable
+	pros::Motor cat1 (9, MOTOR_GEARSET_36); //catapult variables
+	pros::Motor cat2 (10, MOTOR_GEARSET_36, true);
+	pros::Motor_Group catapult({cat1,cat2});
 
 	pros::Controller master (CONTROLLER_MASTER);
 
@@ -93,10 +95,10 @@ void opcontrol() {
 		arm.move_velocity(arm_move);
 
 		if (master.get_digital(DIGITAL_R1)) {
-			cat.move_velocity(100); // This is 100 because it's a 36 gearset motor
+			catapult.move_velocity(100); // This is 100 because it's a 36 gearset motor
 		} else if (master.get_digital(DIGITAL_R2)) {
-			cat.move_velocity(-100);
-		} else {cat.move_velocity(0);}
+			catapult.move_velocity(-100);
+		} else {catapult.move_velocity(0);}
 		
 		if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(100);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-100);} else {spin.move_velocity(0);}
 
