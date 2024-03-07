@@ -51,21 +51,12 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	int speed = 100;
+	left_wheels.move(speed);
+    right_wheels.move(speed);
+}
 
-/**
- * Runs the operator control code. This function will be started in its own task
- * with the default priority and stack size whenever the robot is enabled via
- * the Field Management System or the VEX Competition Switch in the operator
- * control mode.
- *
- * If no competition control is connected, this function will run immediately
- * following initialize().
- *
- * If the robot is disabled or communications is lost, the
- * operator control task will be stopped. Re-enabling the robot will restart the
- * task, not resume it from where it left off.
- */
 void opcontrol() {
 	pros::Motor wheel1(1); //Assign wheel class to certain ports
 	pros::Motor wheel2(2);
@@ -89,7 +80,7 @@ void opcontrol() {
 		int right = power + turn; //Premade calcs
 		int left = power - turn;
 		left_wheels.move(left);
-    		right_wheels.move(right);
+    	right_wheels.move(right);
 
 		int arm_move = master.get_analog(ANALOG_RIGHT_Y);
 		arm.move_velocity(arm_move);
