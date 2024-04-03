@@ -5,25 +5,26 @@
       "includePath": [
         "${workspaceFolder}/**",
         "/workspaces/Template/include",
-        "/workspaces/Team-3/include"
+        "/workspaces/Team-3/include",
+        "~/Team-3/include"
       ],
       "defines": [
         "_DEBUG",
         "UNICODE",
         "_UNICODE"
       ],
-      "compilerPath": "/home/vscode/.vscode-remote/data/User/globalStorage/sigbots.pros/install/pros-toolchain-linux/bin/arm-none-eabi-g++",
-      "cStandard": "c17",
-      "cppStandard": "c++17",
+      "compilerPath": "~/.config/Code/User/globalStorage/sigbots.pros/install/pros-toolchain-linux/bin/arm-none-eabi-g++",
+      "cStandard": "gnu11",
+      "cppStandard": "gnu++20",
       "intelliSenseMode": "gcc-arm",
       "browse": {
         "path": [
-          "/workspaces/Team-3"
+          "~/Team-3"
         ],
         "limitSymbolsToIncludedHeaders": true,
         "databaseFilename": ""
       },
-      "compileCommands": "/workspaces/Team-3/compile_commands.json"
+      "compileCommands": "~/Team-3/compile_commands.json"
     }
   ],
   "version": 4
