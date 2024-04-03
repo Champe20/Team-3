@@ -4,7 +4,6 @@
       "name": "PROS Project",
       "includePath": [
         "${workspaceFolder}/**",
-        "/workspaces/Template/include",
         "/workspaces/Team-3/include",
         "~/Team-3/include"
       ],
