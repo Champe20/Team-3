@@ -51,6 +51,46 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
+void moveforward(){
+	pros::Motor wheel1(1); //Assign wheel class to certain ports
+	pros::Motor wheel2(2);
+	pros::Motor wheel3(3);
+	pros::Motor wheel4(4, true);
+	pros::Motor wheel5(5, true);
+	pros::Motor wheel6(6, true);
+	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+
+
+}
+
+void turnleft(int angle){
+	pros::Motor wheel1(1); //Assign wheel class to certain ports
+	pros::Motor wheel2(2);
+	pros::Motor wheel3(3);
+	pros::Motor wheel4(4, true);
+	pros::Motor wheel5(5, true);
+	pros::Motor wheel6(6, true);
+	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+
+	left_wheels.move(angle);
+}
+
+void turnright(int angle){
+	pros::Motor wheel1(1); //Assign wheel class to certain ports
+	pros::Motor wheel2(2);
+	pros::Motor wheel3(3);
+	pros::Motor wheel4(4, true);
+	pros::Motor wheel5(5, true);
+	pros::Motor wheel6(6, true);
+	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+
+	right_wheels.move(angle);
+}
+
 void autonomous() {
 	pros::Motor wheel1(1); //Assign wheel class to certain ports
 	pros::Motor wheel2(2);
