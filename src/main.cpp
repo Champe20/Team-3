@@ -20,6 +20,34 @@ void initialize() {
 	pros::lcd::set_text(1, "Self Destruct Activated!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+
+	extern pros::Motor wheel1; //Assign wheel class to certain ports
+	pros::Motor wheel1(1, pros::E_MOTOR_GEAR_36, false, E_MOTOR_ENCODER_COUNTS);
+	extern pros::Motor wheel2;
+	pros::Motor wheel2(2, pros::E_MOTOR_GEAR_36, false, E_MOTOR_ENCODER_COUNTS);
+	extern pros::Motor wheel3;
+	pros::Motor wheel3(3, pros::E_MOTOR_GEAR_36, false, E_MOTOR_ENCODER_COUNTS);
+	extern pros::Motor wheel4;
+	pros::Motor wheel4(4, pros::E_MOTOR_GEAR_36, true, E_MOTOR_ENCODER_COUNTS);
+	extern pros::Motor wheel5;
+	pros::Motor wheel5(5, pros::E_MOTOR_GEAR_36, true, E_MOTOR_ENCODER_COUNTS);
+	extern pros::Motor wheel6;
+	pros::Motor wheel6(6, pros::E_MOTOR_GEAR_36, true, E_MOTOR_ENCODER_COUNTS);
+	extern pros::Motor_Group left_wheels;
+	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+	extern pros::Motor_Group right_wheels;
+	pros::Motor_Group left_wheels({wheel4, wheel5, wheel6});
+
+	extern pros::Motor arm;
+	pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
+	extern pros::Motor spin;
+	pros::Motor spin (8, MOTOR_GEARSET_36);
+	extern pros::Motor cat1;
+	pros::Motor cat1 (9, MOTOR_GEARSET_36); //catapult variables
+	extern pros::Motor cat2;
+	pros::Motor cat2 (10, MOTOR_GEARSET_36, true);
+	extern pros::Motor_Group catapult;
+	pros::Motor_Group catapult({cat1,cat2});
 }
 
 /**
@@ -52,74 +80,81 @@ void competition_initialize() {}
  * from where it left off.
  */
 
-void moveforward(int x){ // x should be mm
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+double averagePosition(){
+	return (fabs(left_wheels.get_position()) + fabs(right_wheels.get_position()))/2
+}
+
+void resetdrive(){
+	left_wheels.tare_position();
+	right_wheels.tare_position();
+}
+
+void moveforward(int units, int voltage){ // x should be mm
+//	pros::Motor wheel1(1); //Assign wheel class to certain ports
+//	pros::Motor wheel2(2);
+//	pros::Motor wheel3(3);
+//	pros::Motor wheel4(4, true);
+//	pros::Motor wheel5(5, true);
+//	pros::Motor wheel6(6, true);
+//	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+//	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
  // change this to make the move functions move the right amount
-	left_wheels.move(x);
-	right_wheels.move(x);
+ 	resetdrive();
+	int direction = abs(units)/units;
+	while(averagePosition() < abs(units)){
+		left_wheels.move(voltage * direction);
+		right_wheels.move(voltage * direction);
+	}
 }
 
 void turnleft(int angle){
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+//	pros::Motor wheel1(1); //Assign wheel class to certain ports
+//	pros::Motor wheel2(2);
+//	pros::Motor wheel3(3);
+//	pros::Motor wheel4(4, true);
+//	pros::Motor wheel5(5, true);
+//	pros::Motor wheel6(6, true);
+//	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+//	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 
 	left_wheels.move(angle);
 }
 
 void turnright(int angle){
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+//	pros::Motor wheel1(1); //Assign wheel class to certain ports
+//	pros::Motor wheel2(2);
+//	pros::Motor wheel3(3);
+//	pros::Motor wheel4(4, true);
+//	pros::Motor wheel5(5, true);
+//	pros::Motor wheel6(6, true);
+//	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+//	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 
 	right_wheels.move(angle);
 }
 
 void autonomous() {
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	int speed = 10;
-	left_wheels.move(speed);
-    right_wheels.move(speed);
+//	pros::Motor wheel1(1); //Assign wheel class to certain ports
+//	pros::Motor wheel2(2);
+//	pros::Motor wheel3(3);
+//	pros::Motor wheel4(4, true);
+//	pros::Motor wheel5(5, true);
+//	pros::Motor wheel6(6, true);
+//	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+//	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+	int distance = 10;
+	moveforward(distance, 127);
 }
 
 void opcontrol() {
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
-	pros::Motor spin (8, MOTOR_GEARSET_36);
-	pros::Motor cat1 (9, MOTOR_GEARSET_36); //catapult variables
-	pros::Motor cat2 (10, MOTOR_GEARSET_36, true);
-	pros::Motor_Group catapult({cat1,cat2});
+//	pros::Motor wheel1(1); //Assign wheel class to certain ports
+//	pros::Motor wheel2(2);
+//	pros::Motor wheel3(3);
+//	pros::Motor wheel4(4, true);
+//	pros::Motor wheel5(5, true);
+//	pros::Motor wheel6(6, true);
+//	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
+//	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 
 	pros::Controller master (CONTROLLER_MASTER);
 
@@ -128,9 +163,10 @@ void opcontrol() {
 		int turn = master.get_analog(ANALOG_LEFT_X); //Gets a X value from joystick
 		int right = power + turn; //Premade calcs
 		int left = power - turn;
-		left_wheels.move(left);
-    	right_wheels.move(right);
-
+		if(abs(left) > 5 || abs(right) > 5){
+			left_wheels.move_voltage(left * (12000/127));
+    		right_wheels.move_voltage(right * (12000/127));
+		}
 		int arm_move = master.get_analog(ANALOG_RIGHT_Y);
 		arm.move_velocity(arm_move);
 
