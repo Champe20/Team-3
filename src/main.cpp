@@ -101,7 +101,7 @@ void autonomous() {
 	pros::Motor wheel6(6, true);
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	int speed = 2;
+	int speed = 10;
 	left_wheels.move(speed);
     right_wheels.move(speed);
 }
