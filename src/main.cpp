@@ -52,7 +52,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 
-void moveforward(){
+void moveforward(int x){ // x should be mm
 	pros::Motor wheel1(1); //Assign wheel class to certain ports
 	pros::Motor wheel2(2);
 	pros::Motor wheel3(3);
@@ -61,8 +61,9 @@ void moveforward(){
 	pros::Motor wheel6(6, true);
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-
-
+ // change this to make the move functions move the right amount
+	left_wheels.move(x);
+	right_wheels.move(x);
 }
 
 void turnleft(int angle){
@@ -100,7 +101,7 @@ void autonomous() {
 	pros::Motor wheel6(6, true);
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	int speed = 100;
+	int speed = 2;
 	left_wheels.move(speed);
     right_wheels.move(speed);
 }
