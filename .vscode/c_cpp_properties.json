@@ -12,13 +12,13 @@
         "UNICODE",
         "_UNICODE"
       ],
-      "compilerPath": "~/.config/Code/User/globalStorage/sigbots.pros/install/pros-toolchain-linux/bin/arm-none-eabi-g++",
+      "compilerPath": "/home/vscode/.vscode-remote/data/User/globalStorage/sigbots.pros/install/pros-toolchain-linux/bin/arm-none-eabi-g++",
       "cStandard": "gnu11",
       "cppStandard": "gnu++20",
       "intelliSenseMode": "gcc-arm",
       "browse": {
         "path": [
-          "~/Team-3"
+          "/workspaces/Team-3"
         ],
         "limitSymbolsToIncludedHeaders": true,
         "databaseFilename": ""
