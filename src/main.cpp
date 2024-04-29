@@ -62,8 +62,8 @@ void moveforward(int x){ // x should be mm
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
  // change this to make the move functions move the right amount
-	left_wheels.move(x);
-	right_wheels.move(x);
+	left_wheels.move_relative(x,100);
+	right_wheels.move_relative(x,100);
 }
 
 void turnleft(int angle){
@@ -76,7 +76,7 @@ void turnleft(int angle){
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 
-	left_wheels.move(angle);
+	left_wheels.move_relative(angle,100);
 }
 
 void turnright(int angle){
@@ -89,7 +89,7 @@ void turnright(int angle){
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 
-	right_wheels.move(angle);
+	right_wheels.move_relative(angle,100);
 }
 
 void autonomous() {
@@ -102,8 +102,8 @@ void autonomous() {
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 	int speed = 10;
-	left_wheels.move(speed);
-    right_wheels.move(speed);
+	left_wheels.move_relative(speed,100);
+    right_wheels.move_relative(speed,100);
 }
 
 void opcontrol() {
