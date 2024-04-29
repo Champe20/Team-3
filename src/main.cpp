@@ -8,12 +8,12 @@ void on_center_button() {
 		 pros::lcd::clear_line(2);
 	}
 }
-pros::Motor wheel1(1, pros::E_MOTOR_GEAR_GREEN, true); //Assign wheel class to certain ports
-pros::Motor wheel2(2, pros::E_MOTOR_GEAR_GREEN, true);
-pros::Motor wheel3(3, pros::E_MOTOR_GEAR_GREEN, true);
-pros::Motor wheel4(4, pros::E_MOTOR_GEAR_GREEN);
-pros::Motor wheel5(5, pros::E_MOTOR_GEAR_GREEN);
-pros::Motor wheel6(6, pros::E_MOTOR_GEAR_GREEN);
+pros::Motor wheel1(1, pros::E_MOTOR_GEAR_GREEN, true, pros::E_MOTOR_ENCODER_DEGREES); //Assign wheel class to certain ports
+pros::Motor wheel2(2, pros::E_MOTOR_GEAR_GREEN, true, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor wheel3(3, pros::E_MOTOR_GEAR_GREEN, true, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor wheel4(4, pros::E_MOTOR_GEAR_GREEN,false, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor wheel5(5, pros::E_MOTOR_GEAR_GREEN,false, pros::E_MOTOR_ENCODER_DEGREES);
+pros::Motor wheel6(6, pros::E_MOTOR_GEAR_GREEN,false, pros::E_MOTOR_ENCODER_DEGREES);
 pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 
