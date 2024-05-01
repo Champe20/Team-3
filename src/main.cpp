@@ -16,6 +16,11 @@ pros::Motor wheel5(5, pros::E_MOTOR_GEAR_GREEN,false, pros::E_MOTOR_ENCODER_DEGR
 pros::Motor wheel6(6, pros::E_MOTOR_GEAR_GREEN,false, pros::E_MOTOR_ENCODER_DEGREES);
 pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
+pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
+pros::Motor spin (8, MOTOR_GEARSET_36);
+pros::Motor cat1 (9, MOTOR_GEARSET_36); //catapult variables
+pros::Motor cat2 (10, MOTOR_GEARSET_36, true);
+pros::Motor_Group catapult({cat1,cat2});
 
 /**
 * Runs initialization code. This occurs as soon as the program is started.
@@ -97,6 +102,13 @@ void turnleft(int angle){
 	left_wheels.move_relative(angle,100);
 }
 
+void grabBall() {
+	spin.move(127);
+	arm.move(127);
+	left_wheels.move_relative(1000,127);
+	arm.move(0);
+	spin.move(0);
+}
 
 void turnright(int angle){
 	/*
@@ -132,6 +144,7 @@ void autonomous() {
 	resetdrive();
 	left_wheels.move_relative(speed,1000);
 	right_wheels.move_relative(speed,1000);
+	grabBall();
 }
 
 
@@ -146,12 +159,6 @@ void opcontrol() {
 	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
 	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
 	*/
-	pros::Motor arm (7, MOTOR_GEARSET_36); // The arm motor has the 100rpm (red) gearset
-	pros::Motor spin (8, MOTOR_GEARSET_36);
-	pros::Motor cat1 (9, MOTOR_GEARSET_36); //catapult variables
-	pros::Motor cat2 (10, MOTOR_GEARSET_36, true);
-	pros::Motor_Group catapult({cat1,cat2});
-
 
 	pros::Controller master (CONTROLLER_MASTER);
 
