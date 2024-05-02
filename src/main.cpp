@@ -74,7 +74,6 @@ void moveforward(int x){ // x should be mm
 	right_wheels.move_relative(x,127);
 }
 
-
 void turnleft(int angle){
 	left_wheels.move_relative(angle,127);
 }
@@ -109,7 +108,8 @@ void resetdrive(){
 */
 
 void launchBall(){
-
+	catapult.move_relative(120,127);
+	catapult.move_relative(-120,127);
 } 
 
 void flex(){
@@ -138,7 +138,6 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 		moveforward((foot * 4));
 		turnright(80); // This needs to be enough to turn towards the goal
 		depoBall();
-		
 		if(WeNeedToHeadBackToTheBar){
 			turnleft(120); //we are heading back to the bar now, measurments will not be percise
 			launchBall();
@@ -156,7 +155,8 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 			moveforward(foot * 5);
 			depoBall();
 		}
-	} else if(!(teamred) && extraball){
+	} 
+	else if(!(teamred) && extraball){
 		moveforward((foot * 4));
 		turnright(80); // This needs to be enough to turn towards the goal
 		depoBall();
@@ -180,7 +180,9 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 			moveforward(foot * 5);
 			depoBall();
 		}
-	} else if(teamred && !(extraball)){
+	} 
+	
+	else if(teamred && !(extraball)){
 		moveforward((foot * 4));
 		turnright(80); // This needs to be enough to turn towards the goal
 		depoBall();
@@ -196,7 +198,9 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 			moveforward(-foot*3);
 			launchBall();
 		}
-	} else{
+	} 
+	
+	else{
 		moveforward((foot * 4));
 		turnright(80); // This needs to be enough to turn towards the goal
 		depoBall();
