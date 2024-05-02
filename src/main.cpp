@@ -72,76 +72,37 @@ void competition_initialize() {}
 
 
 void moveforward(int x){ // x should be mm
-	/*
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	*/
-// change this to make the move functions move the right amount
-	left_wheels.move_relative(x,100);
-	right_wheels.move_relative(x,100);
+	left_wheels.move_relative(x,127);
+	right_wheels.move_relative(x,127);
 }
 
 
 void turnleft(int angle){
-	/*
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	*/
 	left_wheels.move_relative(angle,100);
 }
 
 void grabBall() {
 	spin.move(127);
-	arm.move(127);
 	left_wheels.move_relative(1000,127);
-	arm.move(0);
+	right_wheels.move_relative(1000,127);
 	spin.move(0);
+	arm.move(-127);
+	pros::delay(2);
+	arm.move(0);
 }
 
 void turnright(int angle){
-	/*
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	*/
 	right_wheels.move_relative(angle,100);
 }
+/*
 void resetdrive(){
 	left_wheels.tare_position();
 	right_wheels.tare_position();
 }
-
+*/
 
 void autonomous() {
-	/*
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	*/
 	int speed = 100;
-	resetdrive();
 	left_wheels.move_relative(speed,1000);
 	right_wheels.move_relative(speed,1000);
 	grabBall();
@@ -149,17 +110,6 @@ void autonomous() {
 
 
 void opcontrol() {
-	/*
-	pros::Motor wheel1(1); //Assign wheel class to certain ports
-	pros::Motor wheel2(2);
-	pros::Motor wheel3(3);
-	pros::Motor wheel4(4, true);
-	pros::Motor wheel5(5, true);
-	pros::Motor wheel6(6, true);
-	pros::Motor_Group left_wheels({wheel1, wheel2, wheel3});
-	pros::Motor_Group right_wheels({wheel4, wheel5, wheel6});
-	*/
-
 	pros::Controller master (CONTROLLER_MASTER);
 
 
@@ -182,7 +132,7 @@ void opcontrol() {
 			  catapult.move_velocity(-100);
 		 } else {catapult.move_velocity(0);}
 		
-		 if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(100);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-100);} else {spin.move_velocity(0);}
+		 if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(127);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-127);} else {spin.move_velocity(0);}
 
 
 		 pros::delay(2);
