@@ -114,6 +114,9 @@ void launchBall(){
 
 void flex(){
 	//This is to break the band which keeps the catapult down
+	catapult.move(127);
+	pros::delay(500);
+	catapult.move(0);
 }
 
 void autonomous() {
