@@ -249,6 +249,9 @@ void opcontrol() {
 		
 		 if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(127);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-127);} else {spin.move_velocity(0);}
 
+		if (master.get_digital(DIGITAL_UP)) {
+			flex();
+		}
 
 		 pros::delay(2);
  }
