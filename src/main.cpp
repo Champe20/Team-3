@@ -112,6 +112,10 @@ void launchBall(){
 
 } 
 
+void flex(){
+	//This is to break the band which keeps the catapult down
+}
+
 void autonomous() {
 /*
 An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Period with the following tasks completed::
@@ -122,10 +126,37 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 4. Not violated any other rules.
 */
 	int foot = 3600; //UPDATE THIS TO WHAT AN ACTUAL FOOT WOULD BE
-	bool WeNeedToHeadBackToTheBar = true;
-	bool teamred = true;
+	bool WeNeedToHeadBackToTheBar = true; //These needs to be worked out with cooperating team before the match
 	bool extraball = true;
+	bool teamred = true; //This needs to be figured out before the match
+
+	//ALL OF THIS CODE IS UNTESTED. INDIVIDUAL LAYOUTS (blue team + extraball) CAN BE ADJUSTED AS NECESSARY
+	//as of right now Red/Blue team code is copy/paste.
+
+	flex();
 	if(teamred && extraball) { 
+		moveforward((foot * 4));
+		turnright(80); // This needs to be enough to turn towards the goal
+		depoBall();
+		
+		if(WeNeedToHeadBackToTheBar){
+			turnleft(120); //we are heading back to the bar now, measurments will not be percise
+			launchBall();
+			moveforward(foot * 5);
+			turnright(180);
+			moveforward(foot * 2);
+		} else{
+			turnleft(180); //turn around
+			moveforward(foot * 3);
+			depoBall();
+			turnright(160); // now going for extra ball
+			moveforward(foot * 5);
+			grabBall();
+			turnleft(180); //turn around
+			moveforward(foot * 5);
+			depoBall();
+		}
+	} else if(!(teamred) && extraball){
 		moveforward((foot * 4));
 		turnright(80); // This needs to be enough to turn towards the goal
 		depoBall();
@@ -149,7 +180,39 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 			moveforward(foot * 5);
 			depoBall();
 		}
-	} 
+	} else if(teamred && !(extraball)){
+		moveforward((foot * 4));
+		turnright(80); // This needs to be enough to turn towards the goal
+		depoBall();
+		turnleft(220); //Turn around
+		moveforward((foot*2)); // we are going for corner ball now
+		turnright(40);
+		moveforward(foot);
+		grabBall(); //grab corner ball
+		if(WeNeedToHeadBackToTheBar){
+			turnleft(160);
+			moveforward(foot*3);
+		} else{
+			moveforward(-foot*3);
+			launchBall();
+		}
+	} else{
+		moveforward((foot * 4));
+		turnright(80); // This needs to be enough to turn towards the goal
+		depoBall();
+		turnleft(220); //Turn around
+		moveforward((foot*2)); // we are going for corner ball now
+		turnright(40);
+		moveforward(foot);
+		grabBall(); //grab corner ball
+		if(WeNeedToHeadBackToTheBar){
+			turnleft(160);
+			moveforward(foot*3);
+		} else{
+			moveforward(-foot*3);
+			launchBall();
+		}
+	}
 }
 
 
