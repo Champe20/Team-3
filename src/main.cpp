@@ -32,9 +32,7 @@ void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Self Destruct Activated!");
 
-
 	pros::lcd::register_btn1_cb(on_center_button);
-
 }
 
 
@@ -92,6 +90,14 @@ void grabBall() {
 	arm.move(0);
 }
 
+void depoBall() {
+	spin.move(10); //NEEDS TO BE ENOUGH TO LET THE BALL OUT
+	pros::delay(2);
+	arm.move(-127); // YOU May need to repast 'arm.move(-127);' a few times
+	pros::delay(2);
+	arm.move(0);
+}
+
 void turnright(int angle){
 	right_wheels.move_relative(angle,127);
 }
@@ -102,11 +108,48 @@ void resetdrive(){
 }
 */
 
+void launchBall(){
+
+} 
+
 void autonomous() {
-	int speed = 100;
-	left_wheels.move_relative(speed,1000);
-	right_wheels.move_relative(speed,1000);
-	grabBall();
+/*
+An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Period with the following tasks completed::
+
+1. Removed the Triball from the Alliance’sMatch Load Zone that coincides with their Starting Tiles. For example, in Figure 21, the red Alliance must remove the Triball that begins in the bottom-left Match Load Zone, adjacent to Robot 1’s Starting Tiles.
+2. Scored at least one of their own Alliance Triballs in the Alliance’s own Goal.
+3. Ended the Autonomous Period with at least one Robot contacting their own Elevation Bar.
+4. Not violated any other rules.
+*/
+	int foot = 3600; //UPDATE THIS TO WHAT AN ACTUAL FOOT WOULD BE
+	bool WeNeedToHeadBackToTheBar = true;
+	bool teamred = true;
+	bool extraball = true;
+	if(teamred && extraball) { 
+		moveforward((foot * 4));
+		turnright(80); // This needs to be enough to turn towards the goal
+		depoBall();
+		turnleft(120); //MUST BE ENOUGH TO TURN TOWARDS BALL IN THE EDGE
+		moveforward((foot * 3));
+		grabBall();
+		if(WeNeedToHeadBackToTheBar){
+			turnleft(120); //we are heading back to the bar now, measurments will not be percise
+			launchBall();
+			moveforward(foot * 5);
+			turnright(180);
+			moveforward(foot * 2);
+		} else{
+			turnleft(180); //turn around
+			moveforward(foot * 3);
+			depoBall();
+			turnright(160); // now going for extra ball
+			moveforward(foot * 5);
+			grabBall();
+			turnleft(180); //turn around
+			moveforward(foot * 5);
+			depoBall();
+		}
+	} 
 }
 
 
