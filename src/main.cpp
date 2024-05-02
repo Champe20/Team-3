@@ -120,7 +120,8 @@ void autonomous() {
 /*
 An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Period with the following tasks completed::
 
-1. Removed the Triball from the Alliance’sMatch Load Zone that coincides with their Starting Tiles. For example, in Figure 21, the red Alliance must remove the Triball that begins in the bottom-left Match Load Zone, adjacent to Robot 1’s Starting Tiles.
+1. Removed the Triball from the Alliance’sMatch Load Zone that coincides with their Starting Tiles. 
+	For example, in Figure 21, the red Alliance must remove the Triball that begins in the bottom-left Match Load Zone, adjacent to Robot 1’s Starting Tiles.
 2. Scored at least one of their own Alliance Triballs in the Alliance’s own Goal.
 3. Ended the Autonomous Period with at least one Robot contacting their own Elevation Bar.
 4. Not violated any other rules.
