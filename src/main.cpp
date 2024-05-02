@@ -78,7 +78,7 @@ void moveforward(int x){ // x should be mm
 
 
 void turnleft(int angle){
-	left_wheels.move_relative(angle,100);
+	left_wheels.move_relative(angle,127);
 }
 
 void grabBall() {
@@ -86,13 +86,14 @@ void grabBall() {
 	left_wheels.move_relative(1000,127);
 	right_wheels.move_relative(1000,127);
 	spin.move(0);
+	pros::delay(2);
 	arm.move(-127);
 	pros::delay(2);
 	arm.move(0);
 }
 
 void turnright(int angle){
-	right_wheels.move_relative(angle,100);
+	right_wheels.move_relative(angle,127);
 }
 /*
 void resetdrive(){
