@@ -238,21 +238,16 @@ void opcontrol() {
 
 
 		 int arm_move = master.get_analog(ANALOG_RIGHT_Y);
+		 arm.move_velocity(arm_move);
+
 
 		 if (master.get_digital(DIGITAL_R1)) {
 			  catapult.move_velocity(100); // This is 100 because it's a 36 gearset motor
-			  arm.move_velocity(arm_move);
 		 } else if (master.get_digital(DIGITAL_R2)) {
 			  catapult.move_velocity(-100);
 		 } else {catapult.move_velocity(0);}
 		
-		 if (master.get_digital(DIGITAL_L1)) {
-			spin.move_velocity(127);
-		} else if (master.get_digital(DIGITAL_L2)) {
-			spin.move_velocity(-127);
-		} else {
-			spin.move_velocity(0);
-		}
+		 if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(127);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-127);} else {spin.move_velocity(0);}
 
 		if (master.get_digital(DIGITAL_UP)) {
 			flex();
