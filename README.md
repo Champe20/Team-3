@@ -1,2 +1,2 @@
-# Template
-The batteries-included base for South County Vex
+# Team-3
+This repository contains the source code for TSA team South County A
