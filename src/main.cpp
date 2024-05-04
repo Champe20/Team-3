@@ -129,6 +129,7 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 3. Ended the Autonomous Period with at least one Robot contacting their own Elevation Bar.
 4. Not violated any other rules.
 */
+/*
 	int foot = 3600; //UPDATE THIS TO WHAT AN ACTUAL FOOT WOULD BE
 	bool WeNeedToHeadBackToTheBar = true; //These needs to be worked out with cooperating team before the match
 	bool extraball = true;
@@ -221,6 +222,8 @@ An Autonomous Win Point is awarded to any Alliance that ends the Autonomous Peri
 			launchBall();
 		}
 	}
+	*/
+	grabBall();
 }
 
 
@@ -242,10 +245,10 @@ void opcontrol() {
 
 
 		 if (master.get_digital(DIGITAL_R1)) {
-			  catapult.move_velocity(100); // This is 100 because it's a 36 gearset motor
+			  catapult.move(127); // This is 100 because it's a 36 gearset motor
 		 } else if (master.get_digital(DIGITAL_R2)) {
-			  catapult.move_velocity(-100);
-		 } else {catapult.move_velocity(0);}
+			  catapult.move(-127);
+		 } else {catapult.move(0);}
 		
 		 if (master.get_digital(DIGITAL_L1)) {spin.move_velocity(127);} else if (master.get_digital(DIGITAL_L2)) {spin.move_velocity(-127);} else {spin.move_velocity(0);}
 
